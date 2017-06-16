@@ -75,7 +75,7 @@ module.exports = function(grunt) {
 			caption: caption,
 			slides: slides
 		};
-		var templateFile = path.join(__dirname, 'templates/presentation.html');
+		var templateFile = options.template || path.join(__dirname, 'templates/presentation.html');
 		var template = fs.readFileSync(templateFile, 'utf8');
 		var html = grunt.template.process(template, {data: context});
 
