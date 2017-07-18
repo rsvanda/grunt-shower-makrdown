@@ -19,7 +19,7 @@ module.exports = function(grunt) {
 
 		var srcFile = options.src ? options.src : target + '.md';
 		var src = grunt.file.read(srcFile);
-		var slides = src.split('!SLIDE');
+		var slides = src.split('!SLIDE'); // /^---/gm
 		var caption = marked(slides.shift());  // Caption is a text above first !SLIDE
 		var title = options.title;
 
@@ -50,7 +50,7 @@ module.exports = function(grunt) {
 				.replace(/@@(.*?)@@/g, '<mark>$1</mark>')
 				.replace(/<p>(<img[^<]*)<\/p>/mg, '$1')
 				.replace(/<li>\?\s*/g, '<li class="next">')  // Delayed lists
-				.replace(/<pre>([\s\S]*)<\/pre>/g, _addCodeTags)  // Enable line numbering in code examples
+				//.replace(/<pre>([\s\S]*)<\/pre>/g, _addCodeTags)  // Enable line numbering in code examples
 				.replace(/<pre><code class="lang-([^"]+)"/g, '<pre><code class="language-$1"')  // HTML5 class names
 				.replace(/<code><\/code>/g, '<code>&shy;</code>')  // Fix empty lines
 				.replace(/\s*<code>&shy;<\/code><\/pre>/g, '</pre>')  // Remove last empty line
